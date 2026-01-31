@@ -1,32 +1,17 @@
 
 # TEMA 1. Clases y objetos
 
-  
-
 ## 1. ¿Cuáles son las cuatro características básicas de la programación orientada a objetos? Describe brevemente cada una
-
-  
 
 **Abstracción**: se centra en el diseño conceptual, aislando la complejidad al modelar únicamente las características esenciales de una entidad para el contexto del problema. En Java, este mecanismo se articula mediante `interface` y clases `abstract` que definen contratos de comportamiento, permitiendo que el desarrollo se enfoque en qué funciones realiza un objeto, ignorando los detalles de cómo se implementan internamente.
 
-  
-
 **Encapsulamiento**: asegura la integridad del objeto al agrupar datos y comportamientos en una única unidad lógica, restringiendo el acceso directo al estado interno. Mediante el uso de modificadores de acceso (`private`, `protected`), se obliga a interactuar con los datos a través de métodos públicos controlados. Esto reduce el acoplamiento y permite modificar la implementación interna sin afectar a los clientes que consumen la clase.
-
-  
 
 **Herencia**: promueve la reutilización y organización del código estableciendo relaciones jerárquicas de tipo "es-un" entre clases. Al permitir que una subclase adquiera propiedades y métodos de una superclase (mediante `extends`), se facilita la especialización del comportamiento y se evita la redundancia, situando la lógica común en los niveles superiores de la jerarquía.
 
-  
-
 El **polimorfismo** otorga flexibilidad al sistema permitiendo que una referencia de tipo genérico se comporte de diferentes maneras según la instancia concreta que aloje en tiempo de ejecución. Gracias a la sobrescritura de métodos (`@Override`) y al enlace dinámico (*dynamic binding*), un mismo mensaje puede desencadenar distintas implementaciones, desacoplando el código cliente de las clases específicas.
 
-  
-
 Finalmente, estos cuatro conceptos operan de manera interdependiente para gestionar la complejidad del software. La abstracción dicta el modelo y el encapsulamiento protege su implementación; la herencia propaga dicha estructura evitando duplicidades, y el polimorfismo aprovecha la jerarquía resultante para permitir la extensibilidad y el tratamiento uniforme de objetos heterogéneos.
-
-  
-  
 
 ## 2. Cita cuatro lenguajes populares que permitan la programación orientada a objetos
 
