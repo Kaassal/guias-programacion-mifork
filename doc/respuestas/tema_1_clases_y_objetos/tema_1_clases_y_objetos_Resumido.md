@@ -1,23 +1,22 @@
-<!--
-Posible prompt:
-<prompt>
-Tengo un cuestionario con preguntas sobre "Clases y Objetos". Debes tener en cuenta que los conocimientos previos que tengo (y por tanto tus respuestas deben ser adaptadas), son:
-- C/C++ sin orientación a objetos.
-- Temas de Java previos: ninguno.
-
-Cada respuesta debe tener entre 2 - 4 párrafos de longitud (sin contar los trozos de código).
-
-Por favor, escribe en impersonal las respuestas.
-
-</prompt>
-----
--->
-
 # TEMA 1. Clases y objetos
 
 ## 1. ¿Cuáles son las cuatro características básicas de la programación orientada a objetos? Describe brevemente cada una
 
-### Respuesta
+**Abstracción**: Su proposito es poder olvidar detalles, con el fin de 
+
+- Manejar temas complejos mas facilmenénte, olvidando detalles que no son importantes para la resolución del problema
+- Mejorar la experiencia de lectura y mantenimiento del codigo 
+
+**Encapsulación**: Sirve para
+
+- Agrupar datos y métodos dentro de una clase, protegiendo la integridad del estado interno del objeto al restringir el acceso directo 
+- Ocultar detalles de implementación, permitiendo interactuar con él solo a través de una interfaz pública definida
+
+**Herencia**: Crea jerarquias
+
+- Permite que un una "subclase" extienda una clase heredando asi la logica de esta lo que ayuda a escribir menos codigo repetitivo ya que solo se escriben las funciones exclusivas a esa nueva clase.
+
+**Polimorfismo**: Permite usar la misma función para distintas implementaciones
 
 
 ## 2. Cita cuatro lenguajes populares que permitan la programación orientada a objetos
