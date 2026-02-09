@@ -101,8 +101,24 @@ Aquí tienes la respuesta esquemática cubriendo los cuatro puntos de la pregunt
 
 ## 6. ¿Dónde se almacenan en memoria los objetos? ¿Es igual en todos los lenguajes? ¿Qué es la **recolección de basura**? 
 
-### Respuesta
+- Los objetos se almacenan en el Heap, en la mayoría de los lenguajes.
+- Otros permiten también el stack. Ej cpp
 
+**Ventajas de almaccenar objetos en el Heap:**
+
+- La memoria es dinámica, se decide lo que se ocupa en tiempo de ejecución. 
+- La vida de los objetos del Heap no depende de la vida de la función que los crea
+
+**Problemas del Heap**
+
+- Hay que liberar memoria no usada del Heap.
+    - Hay dos maneras de manejar memoria en el Heap
+        - Manual: Dificil y propenso a bugs ("memory leak")
+        - Recolector de basura: Automático pero mas lento, elimina objetos no accesibles directa o indirectamente desde el stack
+
+>**Nota:** Los pros de el recolector de basura es que evitas memory leaks, pero es poco eficiente, es decir si necesitamos una aplicación **muy** eficiente el manejo de memoria manual sigue siendo preferente
+
+>**Nota:** Un sintoma de memory leak muy comun es un programa que se degrada a lo largo de su tiempo de ejecución
 
 ## 7. ¿Qué es un método? ¿Qué es la **sobrecarga de métodos**? 
 
@@ -118,21 +134,64 @@ Aquí tienes la respuesta esquemática cubriendo los cuatro puntos de la pregunt
 
 ## 9. ¿Cuál es el punto de entrada en un programa en Java? ¿Qué es `static` y para qué vale? ¿Sólo se emplea para ese método `main`? ¿Para qué se combina con `final`?
 
-### Respuesta
+**Static:**
 
-## 10. Intenta ejecutar un poco de Java de forma básica, con los comandos `javac` y `java`. ¿Cómo podemos compilar el programa y ejecutarlo desde linea de comandos? ¿Java es compilado? ¿Qué es la **máquina virtual**? ¿Qué es el *byte-code* y los ficheros `.class`?
+- Permite usar un metodo o atributo sin necesidad de instancia de la clase, eso implica que, se antepone el nombre de la clase (no de una instancia)
+    - ej: main
+        - `Integer.pasrseInt()` 
+        - `Math,sqrt()` 
 
-### Respuesta
+- En estos metodos nunca existe `this` 
+- En atributos, solo se guardan en un unico lugar de memoria
+
+```java
+
+class Ejercicio 1 {
+    public static void main (String [] args){
+
+    }
+}
+```
+**Constantes:**
+
+```java
+class Punto {
+    double static final PI:3.14;
+}
+```
+
+Final se usa cuando queremos que una variable que no se pueda asignar en el futuro
+
+
+
+## 10. Intenta ejecutar un poco de Java de forma básica, con los comand(os `javac` y `java`. ¿Cómo podemos compilar el programa y ejecutarlo desde linea de comandos? ¿Java es compilado? ¿Qué es la **máquina virtual**? ¿Qué es el *byte-code* y los ficheros `.class`?
+
+**Ficheros .java**
+Son los ficheros en los que escribimos el codigo fuente del programa
+
+**Compilador**
+Tranforma los archivos a .class que son bytecode en caso de java y en el proceso comprueba la sintaxis (parentesis, comas ...) y la semantica (que los nombres de las funciones que se llaman sean correctos ...)
+
+**JVM**
+Interpreta el bytecode, se hace asi para la portabilidad, asi puedes compilarlo una vez y cuando se quiera correr en otro disposistivo se ejecuta directamente en la JVM
+
+
+> Nota: Ficheros java y "compilador" ocurren en tiempo de compilación, el resto en tiempo de ejecución
 
 
 ## 11. En el código anterior de la clase `Punto` ¿Qué es `new`? ¿Qué es un **constructor**? Pon un ejemplo de constructor en una clase `Empleado` que tenga DNI, nombre y apellidos
 
-### Respuesta
+1. Reserva memoria para un nuevo objeto
+2. Ejecuta un constructor con ese objeto como objeto actual
+3. Devuelve ese nuevo objeto (now es una excepciṕn)
 
 
 ## 12. ¿Qué es la referencia `this`? ¿Se llama igual en todos los lenguajes? Pon un ejemplo del uso de `this` en la clase `Punto`
 
-### Respuesta
+**This**
+- Una referencia al objeto actual
+- Util para desambiguar, para aclarar
+- No disponible en metodos **static**
 
 
 ## 13. Añade ahora otro nuevo método que se llame `distanciaA`, que reciba un `Punto` como parámetro y calcule la distancia entre `this` y el punto proporcionado
@@ -142,8 +201,11 @@ Aquí tienes la respuesta esquemática cubriendo los cuatro puntos de la pregunt
 
 ## 14. El paso del `Punto` como parámetro a un método, es **por copia** o **por referencia**, es decir, si se cambia el valor de algún atributo del punto pasado como parámetro, dichos cambios afectan al objeto fuera del método? ¿Qué ocurre si en vez de un `Punto`, se recibiese un entero (`int`) y dicho entero se modificase dentro de la función? 
 
-### Respuesta
+**Paso**
+- Primitivos (int, long, booleant char, double ...): COPIA
+- Objetos: COPIA DE UNA REFERENCIA
 
+>"Idea de implementación": Es como si hubiese un punto primitivo más: "ref"
 
 ## 15. ¿Qué es el método `toString()` en Java? ¿Existe en otros lenguajes? Pon un ejemplo de `toString()` en la clase `Punto` en Java
 
