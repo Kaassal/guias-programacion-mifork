@@ -7,7 +7,12 @@
 
 ## 2. Brevemente ¿Qué es una **"excepción"**? ¿Con qué objetivo las usa un programador cuando implementa funciones o cuando las llama?
 
-### Respuesta
+Excepción: Gestiona una situación anomala
+
+Errores
+- De entrada de usuario (de validación)
+- De programacion 
+- De entrada salida (E/S)
 
 
 ## 3. Reescribe el mismo ejemplo de raiz, pero en Java, metiendo ese método en una clase `Calculadora` y llama a dicho método desde el método `main`, mostrando cómo se puede controlar desde fuera.
@@ -32,8 +37,12 @@
 
 ## 7. En relación con las ventajas de la encapsulación, comparando el ejemplo en C con Java. ¿Qué **información esencial** lleva cualquier **objeto excepción** que es muy útil tener cuando se llega a un manejador?
 
-### Respuesta
+Cada objeto de la clase excepción tiene 3 elementos
 
+- Un mensaje
+- Una traza de llamadas
+    - La traza nos ayuda a saber donde se originó la excepción y por donde se propagó
+- Opcionalmente otra excepcion causa de esta
 
 ## 8. En Java, sobre el bloque **"try-catch"**, ¿se pueden tener más de un bloque `catch`? ¿cuántos bloques `catch` se ejecutan?
 
