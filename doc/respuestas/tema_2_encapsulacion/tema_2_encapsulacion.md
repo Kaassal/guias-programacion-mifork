@@ -227,7 +227,12 @@ Un **enumerado** es un tipo de dato especial que define un conjunto fijo y limit
 
 En Java, un `enum` **es una clase** completa (hereda de `java.lang.Enum`). Esto ofrece ventajas enormes de encapsulación frente a usar constantes enteras (`public static final int`): proporcionan seguridad de tipos (no puedes pasar un valor inválido), pueden tener sus propios atributos, constructores y métodos, y pueden encapsular comportamiento específico para cada constante.
 
-## 23. Crea un tipo enumerado en Java que se llame `Mes`, con doce posibles instancias y que además proporcione métodos para obtener cuántos días tiene ese mes, el ordinal de ese mes en el año (1-12), empleando atributos privados y constructores del tipo enumerado. Añade además cuatro métodos para devolver si ese mes tiene algunos días de invierno, primavera, verano u otoño, indicando con un booleano el hemisferio (norte o sur, parámetro `enHemisferioNorte`).
+```markdown
+## 23. Crea un tipo enumerado en Java que se llame `Mes`, con doce posibles instancias y que además proporcione métodos para obtener cuántos días tiene ese mes, el ordinal de ese mes en el año (1-12), empleando atributos privados y constructores del tipo enumerado.
+
+A diferencia de lenguajes como C o C++, donde un `enum` es fundamentalmente una lista de alias para constantes enteras, en Java un enumerado es una clase completa. Esto permite encapsular el estado interno de cada constante mediante atributos privados y un constructor específico. En este caso, cada mes almacenará su número de días de forma inmutable, garantizando que ninguna parte externa del programa pueda alterar esta propiedad intrínseca.
+
+Para acceder a dicha información de forma segura, se exponen métodos de lectura ("getters") que conforman la interfaz pública. Adicionalmente, se aprovecha el método nativo `ordinal()` que provee Java para todos los enumerados (el cual devuelve un índice basado en cero, según el orden de declaración) sumándole uno para obtener el formato tradicional del 1 al 12.
 
 ```java
 public enum Mes {
@@ -237,44 +242,121 @@ public enum Mes {
     // Atributo encapsulado e inmutable
     private final int dias;
 
-    // Constructor privado (sólo invocado por las constantes del enum)
+    // Constructor privado (sólo invocado internamente por las constantes)
     private Mes(int dias) {
         this.dias = dias;
     }
 
-    // Métodos de acceso
+    // Métodos de acceso (Interfaz pública)
     public int getDias() {
         return dias;
     }
 
     public int getOrdinal1a12() {
-        return this.ordinal() + 1; // ordinal() es nativo y empieza en 0
+        return this.ordinal() + 1;
     }
+}
 
-    // Lógica de estaciones (simplificada: solapamiento de meses)
-    // Invierno Norte: Dic, Ene, Feb, Mar (parte)
+```
+
+## 24. Añade a la clase `Mes` del ejercicio anterior cuatro métodos para devolver si ese mes tiene algunos días de invierno, primavera, verano u otoño, indicando con un booleano el hemisferio (norte o sur, parámetro `enHemisferioNorte`). Es decir: `esDePrimavera(boolean esHemisferioNorte)`, `esDeVerano(boolean esHemisferioNorte)`, `esDeOtoño(boolean esHemisferioNorte)`, `esDeInvierno(boolean esHemisferioNorte)`
+
+La incorporación de estos métodos directamente en el tipo enumerado ilustra una de las mayores ventajas de la encapsulación en la Programación Orientada a Objetos. En la programación estructurada tradicional, se requerirían funciones externas que recibieran el mes como parámetro y utilizaran largas sentencias `switch` para determinar la estación. Al modelar el enumerado como una clase, se centraliza el comportamiento junto con los datos; el propio objeto asume la responsabilidad de calcular y responder a qué estación pertenece basándose en su propio estado.
+
+Para implementar la lógica, se considera que los cambios astronómicos de estación ocurren alrededor del día 21. Esto implica que los meses de transición (marzo, junio, septiembre y diciembre) comparten días de dos estaciones contiguas. Los métodos evalúan la instancia actual mediante la referencia explícita `this` y la combinan con el parámetro del hemisferio para retornar el valor booleano adecuado.
+
+```java
+    // Estos métodos se deben insertar dentro del enum Mes definido en el ejercicio 23
+
     public boolean esDeInvierno(boolean enHemisferioNorte) {
-        return enHemisferioNorte 
-             ? (this == DICIEMBRE || this == ENERO || this == FEBRERO || this == MARZO)
-             : (this == JUNIO || this == JULIO || this == AGOSTO || this == SEPTIEMBRE);
+        if (enHemisferioNorte) {
+            return this == DICIEMBRE || this == ENERO || this == FEBRERO || this == MARZO;
+        } else {
+            return this == JUNIO || this == JULIO || this == AGOSTO || this == SEPTIEMBRE;
+        }
     }
 
     public boolean esDePrimavera(boolean enHemisferioNorte) {
-        return enHemisferioNorte
-             ? (this == MARZO || this == ABRIL || this == MAYO || this == JUNIO)
-             : (this == SEPTIEMBRE || this == OCTUBRE || this == NOVIEMBRE || this == DICIEMBRE);
+        if (enHemisferioNorte) {
+            return this == MARZO || this == ABRIL || this == MAYO || this == JUNIO;
+        } else {
+            return this == SEPTIEMBRE || this == OCTUBRE || this == NOVIEMBRE || this == DICIEMBRE;
+        }
     }
 
     public boolean esDeVerano(boolean enHemisferioNorte) {
-        return enHemisferioNorte
-             ? (this == JUNIO || this == JULIO || this == AGOSTO || this == SEPTIEMBRE)
-             : (this == DICIEMBRE || this == ENERO || this == FEBRERO || this == MARZO);
+        if (enHemisferioNorte) {
+            return this == JUNIO || this == JULIO || this == AGOSTO || this == SEPTIEMBRE;
+        } else {
+            return this == DICIEMBRE || this == ENERO || this == FEBRERO || this == MARZO;
+        }
     }
 
     public boolean esDeOtono(boolean enHemisferioNorte) {
-        return enHemisferioNorte
-             ? (this == SEPTIEMBRE || this == OCTUBRE || this == NOVIEMBRE || this == DICIEMBRE)
-             : (this == MARZO || this == ABRIL || this == MAYO || this == JUNIO);
+        if (enHemisferioNorte) {
+            return this == SEPTIEMBRE || this == OCTUBRE || this == NOVIEMBRE || this == DICIEMBRE;
+        } else {
+            return this == MARZO || this == ABRIL || this == MAYO || this == JUNIO;
+        }
+    }
+
+```
+
+## Ejercicio 23 && 24 completo
+
+
+```java
+public enum Mes {
+    ENERO(31), FEBRERO(28), MARZO(31), ABRIL(30), MAYO(31), JUNIO(30),
+    JULIO(31), AGOSTO(31), SEPTIEMBRE(30), OCTUBRE(31), NOVIEMBRE(30), DICIEMBRE(31);
+
+    // Atributo encapsulado e inmutable
+    private final int dias;
+
+    // Constructor privado (sólo invocado internamente por las constantes)
+    private Mes(int dias) {
+        this.dias = dias;
+    }
+
+    // Métodos de acceso (Interfaz pública)
+    public int getDias() {
+        return dias;
+    }
+
+    public boolean esDeInvierno(boolean enHemisferioNorte) {
+        if (enHemisferioNorte) {
+            return this == DICIEMBRE || this == ENERO || this == FEBRERO || this == MARZO;
+        } else {
+            return this == JUNIO || this == JULIO || this == AGOSTO || this == SEPTIEMBRE;
+        }
+    }
+
+    public boolean esDePrimavera(boolean enHemisferioNorte) {
+        if (enHemisferioNorte) {
+            return this == MARZO || this == ABRIL || this == MAYO || this == JUNIO;
+        } else {
+            return this == SEPTIEMBRE || this == OCTUBRE || this == NOVIEMBRE || this == DICIEMBRE;
+        }
+    }
+
+    public boolean esDeVerano(boolean enHemisferioNorte) {
+        if (enHemisferioNorte) {
+            return this == JUNIO || this == JULIO || this == AGOSTO || this == SEPTIEMBRE;
+        } else {
+            return this == DICIEMBRE || this == ENERO || this == FEBRERO || this == MARZO;
+        }
+    }
+
+    public boolean esDeOtono(boolean enHemisferioNorte) {
+        if (enHemisferioNorte) {
+            return this == SEPTIEMBRE || this == OCTUBRE || this == NOVIEMBRE || this == DICIEMBRE;
+        } else {
+            return this == MARZO || this == ABRIL || this == MAYO || this == JUNIO;
+        }
+    }
+
+    public int getOrdinal1a12() {
+        return this.ordinal() + 1;
     }
 }
 ```
