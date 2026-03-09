@@ -102,8 +102,49 @@ Ejemplo: Exception (engloba a) > IOException (engloba a) > AccessDeniedException
 
 ## 9. Si las excepciones producen rupturas en el código llamador, ¿cómo podemos garantizar que se ejecuta siempre finalmente un código necesario para cierre de ficheros, liberacion de recursos, antes de que continúe propagándose la excepción? Pon un ejemplo en Java con `finally`, tanto con `catch` como sin él.
 
-### Respuesta
+Para garantizar la liberación de recursos frente a las rupturas abruptas del flujo que causan las excepciones, se utiliza el bloque **`finally`**. El entorno de ejecución asegura que el código dentro del bloque `finally` se ejecute siempre, sin importar si el bloque `try` finalizó con éxito, si lanzó una excepción que fue capturada por un `catch`, o si lanzó una excepción que se propagará a niveles superiores.
 
+```java
+import java.io.*;
+
+public class GestorFicheros {
+    
+    // Ejemplo de try-catch-finally
+    public void leerConCatch(String ruta) {
+        FileInputStream fis = null;
+        try {
+            fis = new FileInputStream(ruta);
+            // Operaciones de lectura que podrían fallar
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: Archivo no encontrado.");
+        } finally {
+            // Este bloque se ejecuta SIEMPRE, haya error o no
+            if (fis != null) {
+                try { fis.close(); } catch (IOException ex) {}
+            }
+        }
+    }
+
+    // Ejemplo de try-finally (sin catch, la excepción se propaga hacia arriba)
+    public void leerSinCatch(String ruta) throws FileNotFoundException {
+        FileInputStream fis = null;
+        try {
+            fis = new FileInputStream(ruta);
+            // Operaciones de lectura. Si fallan, se corta aquí.
+        } finally {
+            // Se garantiza el cierre del recurso antes de que 
+            // la excepción continúe propagándose al método llamador.
+            if (fis != null) {
+                try { fis.close(); } catch (IOException ex) {}
+            }
+        }
+    }
+}
+
+        }
+    }
+}
+```
 
 ## 10. En Java, el bloque `finally` puede ir sin `catch`? ¿Se ejecuta siempre tanto si ocurre como si no ocurre una excepción? ¿Y si hay un `return` en medio del `try`?
 

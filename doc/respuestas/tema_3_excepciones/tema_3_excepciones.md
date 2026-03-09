@@ -162,6 +162,10 @@ public class GestorFicheros {
     }
 }
 
+```        }
+    }
+}
+
 ```
 
 ## 10. En Java, el bloque `finally` puede ir sin `catch`? ¿Se ejecuta siempre tanto si ocurre como si no ocurre una excepción? ¿Y si hay un `return` en medio del `try`?
