@@ -148,13 +148,20 @@ public class GestorFicheros {
 
 ## 10. En Java, el bloque `finally` puede ir sin `catch`? ¿Se ejecuta siempre tanto si ocurre como si no ocurre una excepción? ¿Y si hay un `return` en medio del `try`?
 
-### Respuesta
+Sí es correcto tener un `try-catch` que no pase por bloques `catch` y que vaya directamete a un `finally`. Esto es util para garantizar que el codigo que se va a ejecutar, pero que no tiene la responsabilidad de gestionar errores, permitiendo que esta se propague a la llamada.
+
+El bloque `finally` se ejecuta **siempre**, aunque el código lance errores o finalice correctamente. Aún más notable: Si dentro del bloque `try` (o dentro de un `catch`) se ejecuta una sentencia `return` para salir anticipadamente del método, el sistema pausa la ejecución del `return`, salta al bloque `finally`, lo ejecuta en su totalidad, y solo entonces devuelve el valor y finaliza el método original.
 
 
 ## 11. En Java, qué son las excepciones **"controladas"** y las **"no controladas"**? ¿Qué papel juega `RuntimeException`? Pon un ejemplo de excepciones típicas controladas y no controladas que incluso nosotros mismos podríamos usar. Haz dos listas con 3 o 4 ejemplos de situación donde se suele preferir una excepción controlada y donde se suele preferir una excepción no controlada.
 
-### Respuesta
+Excepciones no controladas (No estamos obligados a poner try-catch):
+- Tipicamemte errores de programación que una vez solventados no vuelven a ocurrrir
 
+Excecpciones controladas (obliga a poner try-catch):
+- Tipicamente errores por causas externas y que siempre pueden llegar a ocurrir ej: errores de E/S
+
+TODO:Insertar diagrama mermaid con excepciones
 
 ## 12. ¿Qué es y para qué se usa `throws`? ¿Por qué es alternativa a capturar una excepción controlada?
 
