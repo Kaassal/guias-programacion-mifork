@@ -171,7 +171,30 @@ Alternativa al bloque try-catch que delega la responsabilidad del manejo de erro
 
 ## 13. Pon un ejemplo en Java de firma de método que incluya `throws`, de una función que abre un fichero pero que declara que no le interesa menejar la excepción de si el fichero no existe, sino que se propague hacia arriba. Eso sí, acuérdate del `finally`.
 
-### Respuesta
+En este ejemplo, el método `leerPrimeraLinea` no intenta gestionar el fallo en caso de que el archivo no se encuentre o no pueda leerse. Su firma utiliza `throws IOException` (que abarca también `FileNotFoundException`) para advertir a sus clientes. Sin embargo, asume su responsabilidad interna liberando el recurso de memoria con el uso de `finally`.
+
+```java
+import java.io.*;
+
+public class Lector {
+
+    // La firma indica explícitamente que propaga la excepción
+    public String leerPrimeraLinea(String rutaArchivo) throws IOException {
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new FileReader(rutaArchivo));
+            return reader.readLine(); 
+        } finally {
+            // El finally asegura el cierre del fichero si llegó a abrirse, 
+            // independientemente de que la lectura falle y se propague el error.
+            if (reader != null) {
+                reader.close();
+            }
+        }
+    }
+}
+
+```
 
 
 ## 14. ¿Podemos poner en `throws` excepciones no controladas, como `RuntimeException`? ¿Debería el método llamador entonces poner `try-catch` en ese caso? ¿Qué sentido tendría?
