@@ -199,20 +199,27 @@ public class Lector {
 
 ## 14. ¿Podemos poner en `throws` excepciones no controladas, como `RuntimeException`? ¿Debería el método llamador entonces poner `try-catch` en ese caso? ¿Qué sentido tendría?
 
-### Respuesta
+Sí que se puede pero
 
+- El compilador no obliga a usar try-cacth o throws en el codigo llamador.
+- Se puede usar por propositos de documentación
+- No es lo habitual
 
 ## 15. ¿Cuándo se recomienda usar excepciones controladas, como `IOException`, y cuándo no controladas como `IllegalArgumentException`? ¿Existen en todos los lenguajes ambas opciones? En los que sólo existe una opción, ¿cuál es la más habitual?
 
-### Respuesta
-
+- No hay ambas opciones en todos los lenguajes
+- La más tipuca es la de "no controlada"
 
 ## 16. ¿Tiene sentido lanzar excepciones dentro del `catch`? ¿Se puede relanzar la misma excepción capturada? ¿Cuándo tendría sentido hacer esto último? Pon ejemplos de ambos casos.
 
-### Respuesta
+Sí, tiene sentido para hacer un log.
+Sí se puede relanzar el mismo objeto excepción, tras , por ejemplo, haber ejecutado algo en el catch.
+
+TODO: mezclar fcon respuesta de ia 
 
 
 ## 17. ¿En qué consiste que una excepción sea la **"causa"** de otra excepción? Pon un ejemplo en Java, donde capturemos una excepción de bajo nivel y la encapsulemos en otra personalizada de alto nivel. Cuando una excepción sale por pantalla y tiene una causa, ¿se ve?
 
-### Respuesta
+Exception chaining 
 
+TODO: Completar
