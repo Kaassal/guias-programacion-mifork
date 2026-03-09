@@ -54,8 +54,21 @@ El código que llama la función utiliza la estructura try-catch:
 
 ## 4. ¿Qué es **"lanzar"** una excepción? ¿Qué es **"controlar"** o **"capturar"** una excepción? ¿Qué es que se **"propague"** una excepción? ¿Qué le va ocurriendo a las funciones en la pila de llamadas por donde se va propagando la excepción? ¿Las funciones que no la controlan se reanudan después de alguna forma? Explica con el mismo ejemplo anterior en Java de la raíz cuadrada.
 
-### Respuesta
+a) ¿Qué es "lanzar" una excepción?
 
+Lanzar una excepción significa ejecutar la instrucción throw, creando un objeto excepción y deteniendo inmediatamente la ejecución del método. En el ejemplo anterior, cuando se invoca calc.raiz(-4) y la función detecta un número negativo, se ejecuta throw new IllegalArgumentException(...), lo que crea el objeto excepción y abandona el método sin devolver ningún valor.
+
+b) ¿Qué es "controlar" o "capturar" una excepción?
+
+Controlar o capturar una excepción es el acto de interceptarla usando un bloque catch. En el main, el bloque catch (IllegalArgumentException e) captura la excepción que fue lanzada en raiz(), permitiendo ejecutar código alternativo como imprimir un mensaje de error. Sin este bloque, el programa finalizaría abruptamente con un error no controlado.
+
+c) ¿Qué es que se "propague" una excepción?
+
+Propagar una excepción significa que, si no se captura en el método donde se lanzó, la excepción "viaja" hacia arriba por la pila de llamadas buscando un catch que pueda manejarla.
+
+d) ¿Qué le va ocurriendo a las funciones en la pila de llamadas por donde se va propagando la excepción?
+
+Desde el punto de vista de la pila: cuando raiz() lanza la excepción, ese método desaparece de la pila inmediatamente; el control retrocede un nivel buscando un catch en main(), donde lo encuentra.
 
 ## 5. ¿Qué ventajas tiene frente a C, la **"propagación natural"** de las excepciones a través de la pila (*stack*) de llamadas?
 
