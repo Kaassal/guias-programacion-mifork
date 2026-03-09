@@ -46,8 +46,14 @@ Cada objeto de la clase excepción tiene 3 elementos
 
 ## 8. En Java, sobre el bloque **"try-catch"**, ¿se pueden tener más de un bloque `catch`? ¿cuántos bloques `catch` se ejecutan?
 
-### Respuesta
+Sí puede haber mas de un bloque `catch` , no es super comun pero se puede hacer.
 
+Solo se ejecuta uno
+- Se comprueban en el orden que estan declarados, el primero que encaje con la excepción es el primero que se ejecuta.
+
+> Nota: Esto significa que se deben ordenar de mas especifica a más general.
+
+Ejemplo: Exception (engloba a) > IOException (engloba a) > AccessDeniedException
 
 ## 9. Si las excepciones producen rupturas en el código llamador, ¿cómo podemos garantizar que se ejecuta siempre finalmente un código necesario para cierre de ficheros, liberacion de recursos, antes de que continúe propagándose la excepción? Pon un ejemplo en Java con `finally`, tanto con `catch` como sin él.
 
