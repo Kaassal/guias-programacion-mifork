@@ -165,8 +165,9 @@ TODO:Insertar diagrama mermaid con excepciones
 
 ## 12. ¿Qué es y para qué se usa `throws`? ¿Por qué es alternativa a capturar una excepción controlada?
 
-### Respuesta
+Se usa en la declaracion de un metodo para advertir que puede hacer un return de una o mas exceciones controladas. 
 
+Alternativa al bloque try-catch que delega la responsabilidad del manejo de errores, haciendo que la la excepcion se capture o se propague cuando el metodo es llamado.
 
 ## 13. Pon un ejemplo en Java de firma de método que incluya `throws`, de una función que abre un fichero pero que declara que no le interesa menejar la excepción de si el fichero no existe, sino que se propague hacia arriba. Eso sí, acuérdate del `finally`.
 
