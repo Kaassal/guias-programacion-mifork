@@ -1,4 +1,3 @@
-
 # Tema 5. Polimorfismo
 
 ## 1. Brevemente, ¿qué es el **"polimorfismo"** y para qué sirve en programación orientada a objetos? ¿qué es la **"sobreescritura"** de métodos?
@@ -27,21 +26,26 @@ class Soldado {
         System.out.println("¡Señor, sí señor!");
     }
 }
+```
 
+```java
 class Zapador extends Soldado {
-    @Override
+    @Override 
     public void saludar() {
         System.out.println("¡Zapador preparado para detonar!");
     }
 }
+```
 
+```java
 class Artillero extends Soldado {
     @Override
     public void saludar() {
         System.out.println("¡Artillero listo con la munición pesada!");
     }
 }
-
+```
+```java
 public class Main {
     public static void main(String[] args) {
         // Array de referencias de la clase base genérica
@@ -57,6 +61,8 @@ public class Main {
     }
 }
 ```
+
+> Con `@Override` indicamos que no se va a ejecutar el metodo del mismo nombre de la clase padre 
 
 ## 4. Si sobreescribo un método, ¿puedo invocar el método base para trabajar a partir de su resultado? Haz que zapador cambie ligeramente la forma de saludar, que salude de forma normal, tal cual hace el soldado base, pero que además añada un "ZAPADOR A SUS ORDENES" ¿qué palabra clave del lenguaje has usado para invocar al método de la clase base?
 
@@ -146,7 +152,9 @@ En la arquitectura resultante, la entidad encargada de representar la línea que
 abstract class Punto {
     public abstract double calcularDistanciaA(Punto otro);
 }
+```
 
+```java
 class Punto2D extends Punto {
     private double x, y;
     public Punto2D(double x, double y) { this.x = x; this.y = y; }
@@ -160,7 +168,9 @@ class Punto2D extends Punto {
         throw new IllegalArgumentException("El punto debe ser 2D para este cálculo");
     }
 }
+```
 
+```java
 class Punto3D extends Punto {
     private double x, y, z;
     public Punto3D(double x, double y, double z) { this.x = x; this.y = y; this.z = z; }
@@ -176,7 +186,9 @@ class Punto3D extends Punto {
         throw new IllegalArgumentException("El punto debe ser 3D para este cálculo");
     }
 }
+```
 
+```java
 class Linea {
     private Punto origen;
     private Punto destino;

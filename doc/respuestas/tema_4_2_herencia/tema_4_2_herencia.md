@@ -203,9 +203,91 @@ Por ejemplo, si se necesita una clase `Coche` y existe una clase `Motor` con mé
 
 ## 11. Herencia vs. Composición. Se dice que se debe *"favorecer la composición frente a la herencia"*, ¿por qué?
 
-Favorecer la composición radica en la enorme flexibilidad que aporta en contraposición a la rigidez estática de la herencia. En la herencia, las relaciones y comportamientos se definen de forma fija durante el tiempo de compilación; una vez que una clase hereda de otra, no puede cambiar su familia base durante la ejecución.
+¿Por qué favorecer la composición frente a la herencia?
 
-La composición ("tiene-un") genera un acoplamiento mucho más débil. Permite alterar el comportamiento de un objeto dinámicamente en tiempo de ejecución, simplemente intercambiando la instancia interna por otra que implemente la misma interfaz. Además, las clases compuestas tienden a ser más pequeñas, cohesivas y más fáciles de someter a pruebas unitarias aisladas, ya que no arrastran toda la complejidad estructural de una extensa cadena de superclases.
+**Rigidez vs. Flexibilidad:** La herencia es estática; se define al compilar y no se puede cambiar la clase padre de un objeto mientras el programa se ejecuta. La composición es dinámica; permite cambiar el comportamiento en tiempo de ejecución simplemente sustituyendo el objeto interno por otro.
+
+**Acoplamiento:** La herencia crea un acoplamiento fuerte (una clase hija depende profundamente de la implementación de la clase padre). La composición genera un acoplamiento débil (la clase solo usa métodos a través de una interfaz).
+
+**Mantenimiento:** La composición fomenta clases más pequeñas, cohesivas y fáciles de probar, evitando arrastrar todo el código y la complejidad de una jerarquía de herencia profunda.
+
+
+
+Imagina un videojuego donde un personaje ataca.
+
+1. El problema con la Herencia (Rígido)
+Si usamos herencia, el comportamiento queda fijado para siempre al crear el objeto. Un Guerrero no puede decidir usar magia de repente porque su clase ya está definida.
+```Java
+
+abstract class Personaje {
+    public abstract void atacar();
+}
+
+class Guerrero extends Personaje {
+    @Override
+    public void atacar() {
+        System.out.println("Ataca con una espada.");
+    }
+}
+
+// Uso:
+Personaje p = new Guerrero();
+p.atacar(); 
+// Si ahora quiero que ataque con un arco, no puedo. 
+// Tendría que crear un nuevo objeto de clase Arquero.
+```
+
+2. La solución con Composición (Flexible)
+Al usar composición ("tiene-un" arma en lugar de "es-un" tipo específico de atacante), el comportamiento se puede intercambiar en plena ejecución.
+
+```Java
+
+// Interfaz que define el comportamiento
+interface Arma {
+    void usar();
+}
+
+class Espada implements Arma {
+    public void usar() { System.out.println("Ataca con una espada."); }
+}
+
+class Arco implements Arma {
+    public void usar() { System.out.println("Dispara una flecha."); }
+}
+
+// La clase usa la composición ("tiene-un" Arma)
+class Personaje {
+    private Arma arma;
+
+    // Se inyecta el comportamiento inicial
+    public Personaje(Arma arma) {
+        this.arma = arma;
+    }
+
+    // ¡La magia de la composición! Se puede cambiar en tiempo de ejecución
+    public void cambiarArma(Arma nuevaArma) {
+        this.arma = nuevaArma;
+    }
+
+    public void atacar() {
+        arma.usar(); // Delega la acción al objeto compuesto
+    }
+}
+
+// Uso:
+public class Main {
+    public static void main(String[] args) {
+        // Nace con una espada
+        Personaje p = new Personaje(new Espada());
+        p.atacar(); // "Ataca con una espada."
+
+        // Cambia el comportamiento en tiempo de ejecución dinámicamente
+        p.cambiarArma(new Arco());
+        p.atacar(); // "Dispara una flecha."
+    }
+}
+
+```
 
 ## 12. Herencia vs. Composición. Se dice que la *"herencia rompe la encapsulación"*, ¿a qué se refiere esto?
 
