@@ -150,6 +150,73 @@ public class Estadistica {
 }
 ```
 
+```java
+class Par <P , Q> {
+    private final P primero;
+    private final Q segundo;
+
+    public Par {P primero, Q segundo} {
+        this.primero = primero;
+        this.segundo = segundo;
+    }
+
+    public P getPrimero(){
+        return this.primero
+    }
+
+    public Q getSegundo(){
+        return this.segundo
+    }
+}
+```
+
+```java
+class Estadisticas {
+    public static Par <Double , Double> mediayDesviacionTipica (List <Double> valores) {
+        //codigo de calculo
+
+        return new Par <Double, Double>(media , media);
+    }
+}
+```
+
+```java
+class Colegio {
+    public static Par <Alumno , Double> obtenerAlumnosYsusNotas (List <Double> valores) {
+        //codigo de calculo
+        double media;
+        double mediana;
+
+        return new Par <Double, Double>(media , mediana);
+    }
+    //Sin gerenics!!
+    List <Double> valores = ...;
+    Par mediayDesviacionTipica = mediayDesviacionTipica(valores);
+    double media = (Double) mediayDesviacionTipica.getPrimero
+
+    Par resultadoAlumno = ...
+
+    Alumno alumno = (Alumno) resultadoAlumno; //Dowcasting (peligroso)
+}
+```
+
+```java
+//sin generics!
+
+class Par {
+    private Object primero;
+    private Object segundo;
+
+        public primero getPrimero(){
+        return this.primero
+    }
+
+    public segundo getSegundo(){
+        return this.segundo
+    }
+}
+```
+
 ## 8. En Java, se pueden declarar parámetros de tipo también a nivel de método, no solo a nivel de clase. Pon un ejemplo con un método genérico `seleccionaUno`, que pasados dos objetos del mismo tipo, te devuelva aleatoriamente uno de ellos. Muestra la diferencia de definirlo con dos `Object`, a definirlo con dos parámetros de tipo, en terminos de (i) evitar downcasting y (ii) forzar que ambos objetos sean del mismo tipo. 
 
 Para declarar un método genérico, el parámetro de tipo debe especificarse antes del tipo de retorno del método. La gran ventaja reside en establecer relaciones semánticas estrictas entre los parámetros de entrada y el valor de salida de una función aislada.
@@ -176,6 +243,26 @@ public class Utilidades {
         // Error de compilación si se mezclan tipos incompatibles 
         // y se intenta asignar a un tipo específico:
         // String fallo = seleccionaUno("Hola", 42); 
+    }
+}
+```
+```java
+class PruebaGenerics {
+    public static seleccionarUnoDeLosDos(T primero, T segundo){
+        Random rand = new Random();
+        return rand.nextBoolean() ? primero : segundo;
+    }
+
+    public static void main String [] args{
+        Alumno a1 = new Alumno ("Alan");
+        Alumno a2 = new Alumno ("Bea");
+
+        Alumno unoAlAzar = seleccionaUnoDeLosDos(a1 , a2);
+
+        Double d1 = 10.0;
+        Double d2 = 30.0;
+
+        Double unoAlAlzar  = seleccionaUnoDeLosDos(d1 , d2);
     }
 }
 ```
