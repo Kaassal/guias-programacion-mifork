@@ -1,5 +1,17 @@
 # TEMA 7. Aspectos funcionales
 
+## Deficion de programación funcional
+1. Objetivo: Que las funciones sean "ciudadanos de primera clase", es decir, que    sean un tipo/valor más:
+    1. Pueden ser asignadas a viariables 
+    2. Pueden ser recibidas como parametros 
+    3. Pueden ser devueltas en otras funciones
+
+2. "Expresiones lambda": Expresa un valor de tipo función. No tienen nmbre, solo cabecera y cuerpo
+
+3. Closures
+
+4. En lenguajes con comprobación estatica de tipos (java, ts, c# ...): ¿Que tipo tienen?
+
 ## 1. ¿Qué es un puntero a una función? Pon un ejemplo de código en C, donde se define una función y que reciba una cadena de caracteres como parámetro y devuelva la cadena en mayúsculas. Crea un puntero en una variable local a dicha función llamado `aMayusculas` e invócala con el puntero.
 
 Un puntero a función en C es una variable que almacena la dirección de memoria donde comienza el código ejecutable de una función, en lugar de almacenar un dato convencional. Esto permite invocar funciones indirectamente, pasarlas como argumentos a otras funciones (conocidas como *callbacks*) o almacenarlas en estructuras de datos, brindando un alto grado de flexibilidad al diseño de algoritmos, como las rutinas de ordenación (ej. `qsort`).
