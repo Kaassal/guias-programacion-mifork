@@ -86,3 +86,6 @@
 ## 18. Otro ejemplo expresivo. Ordena una lista de `Persona`, cada persona tiene un nombre y una edad (de tipo entero). Ordena la lista de `Persona` con `Collections.sort`, pasándole como comparador una expresión lambda que compare la edad de ambas personas y si tienen la misma edad, se ordene por orden alfabético del nombre. Crea dos versiones: Una con la función de comparación hecha manualmente, y otra empleando `Comparator`.
 
 ### Respuesta
+
+
+```</Persona></String></Integer></Double,></T,></Double,></Double,></Double,></String,></String,></String,></String,></String,>

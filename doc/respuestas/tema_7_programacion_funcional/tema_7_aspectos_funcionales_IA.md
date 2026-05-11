@@ -413,4 +413,3 @@ public class OrdenacionFuncional {
 }
 ```
 
-```</Persona></String></Integer></Double,></T,></Double,></Double,></Double,></String,></String,></String,></String,></String,>
